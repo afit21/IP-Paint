@@ -19,17 +19,14 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
-        {
-            await InitOpenSeadragon();
-        }
+        if (firstRender) await InitOpenSeadragon();
     }
 
     private async Task InitOpenSeadragon()
     {
         var settings = new
         {
-            prefixUrl = "/openseadragon/images/",
+            prefixUrl = "https://raw.githubusercontent.com/openseadragon/openseadragon/master/images/",
             width = 65536,
             height = 65536,
             tileSize = 512,

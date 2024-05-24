@@ -2,6 +2,11 @@
 @using Microsoft.AspNetCore.Components.Web
 @namespace IPPaint.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IHttpContextAccessor httpContextAccessor;
+@{
+    var remoteIpAddress =
+           httpContextAccessor.HttpContext.Connection?.RemoteIpAddress.ToString();
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +22,7 @@
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
+
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">

@@ -7,6 +7,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
+//This class essentially works by dividing the colour values accross AIPs and BIPs. Each Nibble is a colour value.
 public class IpCanvas
 {
     public static readonly int WIDTH = 65536; // Conceptual WIDTH
@@ -94,14 +95,9 @@ public class IpCanvas
         newByte &= 0x0F;
 
         ref byte targetByte = ref targetArray[arrayIndex];
-        if (isSecondNibble)
-        {
-            targetByte = (byte)((targetByte & 0x0F) | (newByte << 4)); // Set the second nibble
-        }
-        else
-        {
-            targetByte = (byte)((targetByte & 0xF0) | newByte); // Set the first nibble
-        }
+
+        if (isSecondNibble) targetByte = (byte)((targetByte & 0x0F) | (newByte << 4)); // Set the second nibble
+        else targetByte = (byte)((targetByte & 0xF0) | newByte); // Set the first nibble
     }
 
     private void addValueToRangesInFile(string file, byte value)

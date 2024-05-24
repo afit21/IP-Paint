@@ -15,6 +15,7 @@ namespace IPPaint
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddMvc();
+            builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();
 
