@@ -1,0 +1,4 @@
+#Source: https://partnerhelp.netflixstudios.com/hc/en-us/articles/115000257627-What-are-Netflix-s-IP-Addresses-and-Port-Ranges
+54.204.25.0/28
+23.23.189.144/28
+34.195.253.0/25

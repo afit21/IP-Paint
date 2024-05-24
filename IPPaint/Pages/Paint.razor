@@ -1,0 +1,49 @@
+﻿@page "/paint"
+@using SkiaSharp
+@inject IJSRuntime JSRuntime
+@namespace IPPaint
+<style>
+    .openseadragon-canvas {
+        image-rendering: pixelated; /* This forces the browser to use a pixelated approach to image scaling */
+    }
+</style>
+<div id="openseadragon1" style="width: 100%; height: 600px;"></div>
+
+<body>
+    <input type="text" @bind="InputIP" placeholder="Enter IP Address">
+    <button @onclick="CallJavaScript">Zoom to Pixel</button>
+</body>
+
+@code {
+    private string InputIP { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitOpenSeadragon();
+        }
+    }
+
+    private async Task InitOpenSeadragon()
+    {
+        var settings = new
+        {
+            prefixUrl = "/openseadragon/images/",
+            width = 65536,
+            height = 65536,
+            tileSize = 512,
+            minLevel = 0,
+            maxLevel = 4,
+            getTileUrl = "api/tiles/{z}-{x}-{y}.png" // Use a placeholder format
+        };
+
+        await JSRuntime.InvokeVoidAsync("initOpenSeadragon", settings);
+    }
+
+    private async Task CallJavaScript()
+    {
+        await JSRuntime.InvokeVoidAsync("zoomToPixel", InputIP);
+    }
+
+}
